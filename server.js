@@ -6,6 +6,7 @@ const PLAY_TARGET_NAME = '';
 const HOME_TARGET = '';
 const RECONNECT_DELAY = 5000;
 const TARGET_QUALITY = '720p';
+const TARGET_MAX_FPX = 30;
 
 let ws;
 
@@ -22,14 +23,14 @@ const sayThing = function sayThing ( thing ) {
 
 const playStream = function playStream ( streams ) {
     for ( let i = 0; i < streams.length; i = i + 1 ) {
-        if ( streams[ i ].quality.toLowerCase() === TARGET_QUALITY.toLowerCase() ) {
+        if ( streams[ i ].quality.toLowerCase() === TARGET_QUALITY.toLowerCase() && Number( streams[ i ].fps ) <= TARGET_MAX_FPX ) {
             playTarget.play( streams[ i ].uri );
 
             return true;
         }
     }
 
-    console.error( `Unable to find a stream with the preferred quality ( ${ TARGET_QUALITY } )` );
+    console.error( `Unable to find a stream with the preferred quality ( ${ TARGET_QUALITY } ${ TARGET_MAX_FPX } FPS )` );
 };
 
 const connectToServer = function connectToServer () {
