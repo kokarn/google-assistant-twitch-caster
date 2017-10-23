@@ -9,13 +9,14 @@ const TARGET_QUALITY = '720p';
 const TARGET_MAX_FPX = 30;
 
 let ws;
+let playTarget = false;
 
 googlehome.device( HOME_TARGET );
 googlehome.accent( 'uk' );
 
-let playTarget = false;
-
 const sayThing = function sayThing ( thing ) {
+    console.log( `Saying "${ thing }"` );
+
     googlehome.notify( thing, ( response ) => {
         console.log( response );
     } );
@@ -42,7 +43,7 @@ const connectToServer = function connectToServer () {
     } );
 
     ws.on( 'close', () => {
-        console.log( 'Disconnected from server, reconnecting in 5 seconds' );
+        console.log( `Disconnected from server, reconnecting in ${ RECONNECT_DELAY / 1000 } seconds` );
         setTimeout( connectToServer, RECONNECT_DELAY );
     } );
 
