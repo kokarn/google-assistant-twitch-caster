@@ -4,7 +4,7 @@ const chromecasts = require( 'chromecasts' )();
 
 const PLAY_TARGET_NAME = '';
 const HOME_TARGET = '';
-const RECONNECT_DELAY = 5000;
+const RECONNECT_DELAY = 2000;
 const TARGET_QUALITY = '720p';
 const TARGET_MAX_FPX = 30;
 
